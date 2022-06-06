@@ -1,48 +1,88 @@
+class SnakeClass {
+    constructor() {
+        this.x = 2
+        this.y = 2
+        this.dirx = 0
+        this.diry = 0
+        this.tail = [get_tile(this.x, this.y)]
+        color_tile(this.tail[0])
+    }
+
+    change_dir_left() {
+        if (this.dirx === 0) {
+            this.dirx = -1
+            this.diry = 0
+        }
+    }
+
+    change_dir_right() {
+        if (this.dirx === 0) {
+            this.dirx = 1
+            this.diry = 0
+        }
+    }
+
+    change_dir_up() {
+        if (this.diry === 0) {
+            this.dirx = 0
+            this.diry = -1
+        }
+    }
+
+    change_dir_down() {
+        if (this.diry === 0) {
+            this.dirx = 0
+            this.diry = 1
+        }
+    }
+
+    move() {
+        // TODO border crossing
+        this.x += this.dirx
+        this.y += this.diry
+
+        const last_segment = this.tail.shift()
+        uncolor_tile(last_segment)
+
+        const first_segment = get_tile(this.x, this.y)
+        color_tile(first_segment)
+        this.tail.push(first_segment)
+    }
+}
+
 function check_key(e) {
-    switch_tile_color(xx, yy)
     switch (e.key) {
-        case "ArrowUp":
-            console.log("up")
-            yy -= 1
-            break;
-        case "ArrowDown":
-            console.log("down")
-            yy += 1
-            break;
         case "ArrowLeft":
             console.log("left")
-            xx -= 1
+            Snake.change_dir_left()
             break;
         case "ArrowRight":
             console.log("right")
-            xx += 1
+            Snake.change_dir_right()
+            break;
+        case "ArrowUp":
+            console.log("up")
+            Snake.change_dir_up()
+            break;
+        case "ArrowDown":
+            console.log("down")
+            Snake.change_dir_down()
     }
-    if (xx < 0 || xx > 4) {
-        xx = Math.abs(xx) - 1
-    }
-    else if (yy < 0 || yy > 4) {
-        yy = Math.abs(yy) - 1
-    }
-    switch_tile_color(xx, yy)
 }
 
 function get_tile(x, y) {
     return board.children[y].children[x]
 }
 
-function switch_tile_color(x, y) {
-    let tile = get_tile(x, y)
+function color_tile(tile) {
+    tile.style.backgroundColor = "green"
+}
 
-    if (tile.style.backgroundColor === "red") {
-        tile.style.backgroundColor = "gray"
-    }
-    else {
-        tile.style.backgroundColor = "red"
-    }
+function uncolor_tile(tile) {
+    tile.style.backgroundColor = "gray"
 }
 
 document.onkeydown = check_key
 const board = document.getElementById("board").children[0]
 
-var xx = 0, yy = 0
-switch_tile_color(xx, yy)
+const Snake = new SnakeClass()
