@@ -50,10 +50,10 @@ class SnakeClass {
             curr_dir_shower.style.color = "red"
         }
 
-        const last_segment = this.tail.shift()
-        uncolor_tile(last_segment)
-
         if (gameNotOver) {
+            const last_segment = this.tail.shift()
+            uncolor_tile(last_segment)
+
             const first_segment = get_tile(this.x, this.y)
             color_tile(first_segment)
             this.tail.push(first_segment)
@@ -93,6 +93,17 @@ function uncolor_tile(tile) {
     tile.style.backgroundColor = "gray"
 }
 
+function restart_game() {
+    if (typeof Snake != "undefined") {
+        Snake.tail.forEach(uncolor_tile)
+    }
+    curr_dir_shower.innerText = "Current direction: None"
+    curr_dir_shower.style.color = "white"
+    gameNotOver = true
+    Snake = new SnakeClass()
+    main_loop()
+}
+
 function main_loop() {
     console.log("Next move")
     Snake.move()
@@ -104,7 +115,6 @@ function main_loop() {
 document.onkeydown = check_key
 const board = document.getElementById("board").children[0]
 const curr_dir_shower = document.getElementById("curr-dir")
-var gameNotOver = true
-const Snake = new SnakeClass()
+var gameNotOver, Snake
 
-main_loop()
+restart_game()
