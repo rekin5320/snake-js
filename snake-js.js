@@ -12,6 +12,7 @@ class SnakeClass {
         if (this.dirx === 0) {
             this.dirx = -1
             this.diry = 0
+            curr_dir_shower.innerText = "Left"
         }
     }
 
@@ -19,6 +20,7 @@ class SnakeClass {
         if (this.dirx === 0) {
             this.dirx = 1
             this.diry = 0
+            curr_dir_shower.innerText = "Right"
         }
     }
 
@@ -26,6 +28,7 @@ class SnakeClass {
         if (this.diry === 0) {
             this.dirx = 0
             this.diry = -1
+            curr_dir_shower.innerText = "Up"
         }
     }
 
@@ -33,6 +36,7 @@ class SnakeClass {
         if (this.diry === 0) {
             this.dirx = 0
             this.diry = 1
+            curr_dir_shower.innerText = "Down"
         }
     }
 
@@ -84,5 +88,5 @@ function uncolor_tile(tile) {
 
 document.onkeydown = check_key
 const board = document.getElementById("board").children[0]
-
+const curr_dir_shower = document.getElementById("curr-dir")
 const Snake = new SnakeClass()
