@@ -86,7 +86,18 @@ function uncolor_tile(tile) {
     tile.style.backgroundColor = "gray"
 }
 
+function main_loop() {
+    console.log("Next move")
+    Snake.move()
+    if (gameNotOver) {
+        setTimeout(main_loop, 1000);
+    }
+}
+
 document.onkeydown = check_key
 const board = document.getElementById("board").children[0]
 const curr_dir_shower = document.getElementById("curr-dir")
+var gameNotOver = true
 const Snake = new SnakeClass()
+
+main_loop()
