@@ -1,7 +1,7 @@
 class SnakeClass {
     constructor() {
-        this.x = 2
-        this.y = 2
+        this.x = 5
+        this.y = 5
         this.dirx = 0
         this.diry = 0
         this.tail = [get_tile(this.x, this.y)]
@@ -44,7 +44,7 @@ class SnakeClass {
         this.x += this.dirx
         this.y += this.diry
 
-        if (this.x < 0 || this.x > 4 || this.y < 0 || this.y > 4) {
+        if (this.x < 0 || this.x > 9 || this.y < 0 || this.y > 9) {
             gameNotOver = false
             curr_dir_shower.innerText = "GAME OVER"
         }
@@ -96,7 +96,7 @@ function main_loop() {
     console.log("Next move")
     Snake.move()
     if (gameNotOver) {
-        setTimeout(main_loop, 800);
+        setTimeout(main_loop, 400);
     }
 }
 
