@@ -17,6 +17,12 @@ function check_key(e) {
             console.log("right")
             xx += 1
     }
+    if (xx < 0 || xx > 4) {
+        xx = Math.abs(xx) - 1
+    }
+    else if (yy < 0 || yy > 4) {
+        yy = Math.abs(yy) - 1
+    }
     switch_tile_color(xx, yy)
 }
 
