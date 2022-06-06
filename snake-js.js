@@ -49,8 +49,7 @@ class SnakeClass {
             curr_dir_shower.innerText = "GAME OVER"
             curr_dir_shower.style.color = "red"
         }
-
-        if (gameNotOver) {
+        else {
             const last_segment = this.tail.shift()
             uncolor_tile(last_segment)
 
