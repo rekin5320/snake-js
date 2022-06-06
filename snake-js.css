@@ -18,6 +18,6 @@ header h1 {
 .tile {
     width: 40px;
     height: 40px;
-    background: gray;
+    background-color: gray;
     border: 2px solid darkblue;
 }
