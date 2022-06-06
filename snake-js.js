@@ -41,16 +41,22 @@ class SnakeClass {
     }
 
     move() {
-        // TODO border crossing
         this.x += this.dirx
         this.y += this.diry
+
+        if (this.x < 0 || this.x > 4 || this.y < 0 || this.y > 4) {
+            gameNotOver = false
+            curr_dir_shower.innerText = "GAME OVER"
+        }
 
         const last_segment = this.tail.shift()
         uncolor_tile(last_segment)
 
-        const first_segment = get_tile(this.x, this.y)
-        color_tile(first_segment)
-        this.tail.push(first_segment)
+        if (gameNotOver) {
+            const first_segment = get_tile(this.x, this.y)
+            color_tile(first_segment)
+            this.tail.push(first_segment)
+        }
     }
 }
 
@@ -90,7 +96,7 @@ function main_loop() {
     console.log("Next move")
     Snake.move()
     if (gameNotOver) {
-        setTimeout(main_loop, 1000);
+        setTimeout(main_loop, 800);
     }
 }
 
