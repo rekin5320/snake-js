@@ -44,7 +44,7 @@ class SnakeClass {
         this.x += this.dirx
         this.y += this.diry
 
-        if (this.x < 0 || this.x > 9 || this.y < 0 || this.y > 9) {
+        if (this.x < 0 || this.x > 10 || this.y < 0 || this.y > 10) {
             gameNotOver = false
             curr_dir_shower.innerText = "GAME OVER"
             curr_dir_shower.style.color = "red"
