@@ -12,7 +12,7 @@ class SnakeClass {
         if (this.dirx === 0) {
             this.dirx = -1
             this.diry = 0
-            curr_dir_shower.innerText = "Left"
+            curr_dir_shower.innerText = "Current direction: Left"
         }
     }
 
@@ -20,7 +20,7 @@ class SnakeClass {
         if (this.dirx === 0) {
             this.dirx = 1
             this.diry = 0
-            curr_dir_shower.innerText = "Right"
+            curr_dir_shower.innerText = "Current direction: Right"
         }
     }
 
@@ -28,7 +28,7 @@ class SnakeClass {
         if (this.diry === 0) {
             this.dirx = 0
             this.diry = -1
-            curr_dir_shower.innerText = "Up"
+            curr_dir_shower.innerText = "Current direction: Up"
         }
     }
 
@@ -36,7 +36,7 @@ class SnakeClass {
         if (this.diry === 0) {
             this.dirx = 0
             this.diry = 1
-            curr_dir_shower.innerText = "Down"
+            curr_dir_shower.innerText = "Current direction: Down"
         }
     }
 
@@ -47,6 +47,7 @@ class SnakeClass {
         if (this.x < 0 || this.x > 9 || this.y < 0 || this.y > 9) {
             gameNotOver = false
             curr_dir_shower.innerText = "GAME OVER"
+            curr_dir_shower.style.color = "red"
         }
 
         const last_segment = this.tail.shift()
