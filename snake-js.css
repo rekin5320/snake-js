@@ -21,3 +21,7 @@ header h1 {
     background-color: gray;
     border: 2px solid darkblue;
 }
+
+.snake-tail {
+    background-color: rgb(4, 230, 4);
+}

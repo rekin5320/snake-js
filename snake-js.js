@@ -85,11 +85,11 @@ function get_tile(x, y) {
 }
 
 function color_tile(tile) {
-    tile.style.backgroundColor = "green"
+    tile.classList.add("snake-tail")
 }
 
 function uncolor_tile(tile) {
-    tile.style.backgroundColor = "gray"
+    tile.classList.remove("snake-tail")
 }
 
 function restart_game() {
