@@ -15,6 +15,14 @@ header h1 {
     margin-bottom: 0;
 }
 
+button {
+    color: black;
+}
+
+button:disabled{
+    background-color: #6d6d6d;
+}
+
 .tile {
     width: 40px;
     height: 40px;
@@ -27,5 +35,5 @@ header h1 {
 }
 
 .apple {
-    background-color: red
+    background-color: red;
 }

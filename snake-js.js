@@ -168,5 +168,3 @@ const curr_dir_shower = document.getElementById("curr-dir")
 const start_button = document.getElementById("start-button")
 const board_size = 11
 var gameNotOver, Snake, Apple
-
-restart_game()
