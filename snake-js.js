@@ -58,8 +58,14 @@ class SnakeClass {
             start_button.disabled = false
         }
         else {
-            const last_segment = this.tail.shift()
-            uncolor_tile(last_segment, this.css_class)
+            if (Snake.x === Apple.x && Snake.y === Apple.y) {
+                uncolor_tile([Apple.x, Apple.y], Apple.css_class)
+                Apple.move()
+            }
+            else {
+                const last_segment = this.tail.shift()
+                uncolor_tile(last_segment, this.css_class)
+            }
 
             const first_segment = [this.x, this.y]
             color_tile(first_segment, this.css_class)
