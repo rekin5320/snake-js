@@ -1,7 +1,8 @@
 class SnakeClass {
     constructor() {
-        this.x = 5
-        this.y = 5
+        let middle = Math.floor(board_size / 2)
+        this.x = middle
+        this.y = middle
         this.dirx = 0
         this.diry = 0
         this.tail = [get_tile(this.x, this.y)]
@@ -44,7 +45,7 @@ class SnakeClass {
         this.x += this.dirx
         this.y += this.diry
 
-        if (this.x < 0 || this.x > 10 || this.y < 0 || this.y > 10) {
+        if (this.x < 0 || this.x >= board_size || this.y < 0 || this.y >= board_size) {
             gameNotOver = false
             curr_dir_shower.innerText = "GAME OVER"
             curr_dir_shower.style.color = "red"
@@ -114,6 +115,7 @@ function main_loop() {
 document.onkeydown = check_key
 const board = document.getElementById("board").children[0]
 const curr_dir_shower = document.getElementById("curr-dir")
+const board_size = 11
 var gameNotOver, Snake
 
 restart_game()
