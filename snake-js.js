@@ -5,14 +5,16 @@ function randint(a, b) {
 
 class SnakeClass {
     constructor() {
-        let middle = Math.floor(board_size / 2)
         this.css_class = "snake-tail"
+        let middle = Math.floor(board_size / 2)
         this.x = middle
         this.y = middle
         this.dirx = 0
         this.diry = 0
         this.tail = [[this.x, this.y]]
         color_tile(this.tail[0], this.css_class)
+        this.score = 1
+        this.update_score()
     }
 
     change_dir_left() {
@@ -47,18 +49,25 @@ class SnakeClass {
         }
     }
 
+    update_score() {
+        score_shower.innerText = this.score
+    }
+
     move() {
         this.x += this.dirx
         this.y += this.diry
 
         if (this.x < 0 || this.x >= board_size || this.y < 0 || this.y >= board_size) {
+            console.log(`Game over, score: ${this.score}`)
             gameNotOver = false
             curr_dir_shower.innerText = "GAME OVER"
             curr_dir_shower.style.color = "red"
             start_button.disabled = false
         }
         else {
-            if (Snake.x === Apple.x && Snake.y === Apple.y) {
+            if (this.x === Apple.x && this.y === Apple.y) {
+                this.score += 1
+                this.update_score()
                 uncolor_tile([Apple.x, Apple.y], Apple.css_class)
                 Apple.move()
             }
@@ -154,6 +163,7 @@ function main_loop() {
 
 document.onkeydown = check_key
 const board = document.getElementById("board").children[0]
+const score_shower = document.getElementById("score-shower")
 const curr_dir_shower = document.getElementById("curr-dir")
 const start_button = document.getElementById("start-button")
 const board_size = 11
