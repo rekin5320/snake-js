@@ -25,3 +25,7 @@ header h1 {
 .snake-tail {
     background-color: rgb(4, 230, 4);
 }
+
+.apple {
+    background-color: red
+}

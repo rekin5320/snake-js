@@ -6,12 +6,13 @@ function randint(a, b) {
 class SnakeClass {
     constructor() {
         let middle = Math.floor(board_size / 2)
+        this.css_class = "snake-tail"
         this.x = middle
         this.y = middle
         this.dirx = 0
         this.diry = 0
         this.tail = [[this.x, this.y]]
-        color_tile(this.tail[0])
+        color_tile(this.tail[0], this.css_class)
     }
 
     change_dir_left() {
@@ -57,10 +58,10 @@ class SnakeClass {
         }
         else {
             const last_segment = this.tail.shift()
-            uncolor_tile(last_segment)
+            uncolor_tile(last_segment, this.css_class)
 
             const first_segment = [this.x, this.y]
-            color_tile(first_segment)
+            color_tile(first_segment, this.css_class)
             this.tail.push(first_segment)
         }
     }
@@ -68,6 +69,7 @@ class SnakeClass {
 
 class AppleClass {
     constructor() {
+        this.css_class = "apple"
         this.move()
     }
 
@@ -78,7 +80,7 @@ class AppleClass {
             this.move()
         }
         else {
-            color_tile([this.x, this.y])
+            color_tile([this.x, this.y], this.css_class)
         }
     }
 }
@@ -107,19 +109,19 @@ function get_tile(x, y) {
     return board.children[y].children[x]
 }
 
-function color_tile([x, y]) {
+function color_tile([x, y], css_class) {
     let tile = get_tile(x, y)
-    tile.classList.add("snake-tail")
+    tile.classList.add(css_class)
 }
 
-function uncolor_tile([x, y]) {
+function uncolor_tile([x, y], css_class) {
     let tile = get_tile(x, y)
-    tile.classList.remove("snake-tail")
+    tile.classList.remove(css_class)
 }
 
 function restart_game() {
     if (typeof Snake != "undefined") {
-        Snake.tail.forEach(uncolor_tile)
+        Snake.tail.forEach(([x, y]) => uncolor_tile([x, y], Snake.css_class))
     }
     curr_dir_shower.innerText = "Current direction: None"
     curr_dir_shower.style.color = "white"
