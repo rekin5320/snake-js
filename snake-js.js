@@ -1,3 +1,8 @@
+function randint(a, b) {
+    // Return random integer a <= x < b
+    return Math.floor(Math.random() * (b - a)) + a
+}
+
 class SnakeClass {
     constructor() {
         let middle = Math.floor(board_size / 2)
@@ -5,7 +10,7 @@ class SnakeClass {
         this.y = middle
         this.dirx = 0
         this.diry = 0
-        this.tail = [get_tile(this.x, this.y)]
+        this.tail = [[this.x, this.y]]
         color_tile(this.tail[0])
     }
 
@@ -54,9 +59,26 @@ class SnakeClass {
             const last_segment = this.tail.shift()
             uncolor_tile(last_segment)
 
-            const first_segment = get_tile(this.x, this.y)
+            const first_segment = [this.x, this.y]
             color_tile(first_segment)
             this.tail.push(first_segment)
+        }
+    }
+}
+
+class AppleClass {
+    constructor() {
+        this.move()
+    }
+
+    move() {
+        this.x = randint(0, board_size)
+        this.y = randint(0, board_size)
+        if (Snake.tail.includes([this.x, this.y])) {
+            this.move()
+        }
+        else {
+            color_tile([this.x, this.y])
         }
     }
 }
@@ -85,11 +107,13 @@ function get_tile(x, y) {
     return board.children[y].children[x]
 }
 
-function color_tile(tile) {
+function color_tile([x, y]) {
+    let tile = get_tile(x, y)
     tile.classList.add("snake-tail")
 }
 
-function uncolor_tile(tile) {
+function uncolor_tile([x, y]) {
+    let tile = get_tile(x, y)
     tile.classList.remove("snake-tail")
 }
 
@@ -101,6 +125,7 @@ function restart_game() {
     curr_dir_shower.style.color = "white"
     gameNotOver = true
     Snake = new SnakeClass()
+    Apple = new AppleClass()
     main_loop()
 }
 
@@ -116,6 +141,6 @@ document.onkeydown = check_key
 const board = document.getElementById("board").children[0]
 const curr_dir_shower = document.getElementById("curr-dir")
 const board_size = 11
-var gameNotOver, Snake
+var gameNotOver, Snake, Apple
 
 restart_game()
