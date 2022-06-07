@@ -123,6 +123,9 @@ function restart_game() {
     if (typeof Snake != "undefined") {
         Snake.tail.forEach(([x, y]) => uncolor_tile([x, y], Snake.css_class))
     }
+    if (typeof Apple != "undefined") {
+        uncolor_tile([Apple.x, Apple.y], Apple.css_class)
+    }
     curr_dir_shower.innerText = "Current direction: None"
     curr_dir_shower.style.color = "white"
     gameNotOver = true
