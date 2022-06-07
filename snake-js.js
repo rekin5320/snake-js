@@ -55,6 +55,7 @@ class SnakeClass {
             gameNotOver = false
             curr_dir_shower.innerText = "GAME OVER"
             curr_dir_shower.style.color = "red"
+            start_button.disabled = false
         }
         else {
             const last_segment = this.tail.shift()
@@ -120,18 +121,21 @@ function uncolor_tile([x, y], css_class) {
 }
 
 function restart_game() {
-    if (typeof Snake != "undefined") {
-        Snake.tail.forEach(([x, y]) => uncolor_tile([x, y], Snake.css_class))
+    if (!gameNotOver) {
+        if (typeof Snake != "undefined") {
+            Snake.tail.forEach(([x, y]) => uncolor_tile([x, y], Snake.css_class))
+        }
+        if (typeof Apple != "undefined") {
+            uncolor_tile([Apple.x, Apple.y], Apple.css_class)
+        }
+        curr_dir_shower.innerText = "Current direction: None"
+        curr_dir_shower.style.color = "white"
+        start_button.disabled = true
+        gameNotOver = true
+        Snake = new SnakeClass()
+        Apple = new AppleClass()
+        main_loop()
     }
-    if (typeof Apple != "undefined") {
-        uncolor_tile([Apple.x, Apple.y], Apple.css_class)
-    }
-    curr_dir_shower.innerText = "Current direction: None"
-    curr_dir_shower.style.color = "white"
-    gameNotOver = true
-    Snake = new SnakeClass()
-    Apple = new AppleClass()
-    main_loop()
 }
 
 function main_loop() {
@@ -145,6 +149,7 @@ function main_loop() {
 document.onkeydown = check_key
 const board = document.getElementById("board").children[0]
 const curr_dir_shower = document.getElementById("curr-dir")
+const start_button = document.getElementById("start-button")
 const board_size = 11
 var gameNotOver, Snake, Apple
 
