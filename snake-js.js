@@ -11,6 +11,8 @@ class SnakeClass {
         this.y = middle
         this.dirx = 0
         this.diry = 0
+        this.dirx_current = 0
+        this.diry_current = 0
         this.tail = [[this.x, this.y]]
         color_tile(this.tail[0], this.css_class)
         this.score = 1
@@ -18,7 +20,7 @@ class SnakeClass {
     }
 
     change_dir_left() {
-        if (this.dirx === 0) {
+        if (this.dirx_current === 0) {
             this.dirx = -1
             this.diry = 0
             curr_dir_shower.innerText = "Current direction: Left"
@@ -26,7 +28,7 @@ class SnakeClass {
     }
 
     change_dir_right() {
-        if (this.dirx === 0) {
+        if (this.dirx_current === 0) {
             this.dirx = 1
             this.diry = 0
             curr_dir_shower.innerText = "Current direction: Right"
@@ -34,7 +36,7 @@ class SnakeClass {
     }
 
     change_dir_up() {
-        if (this.diry === 0) {
+        if (this.diry_current === 0) {
             this.dirx = 0
             this.diry = -1
             curr_dir_shower.innerText = "Current direction: Up"
@@ -42,7 +44,7 @@ class SnakeClass {
     }
 
     change_dir_down() {
-        if (this.diry === 0) {
+        if (this.diry_current === 0) {
             this.dirx = 0
             this.diry = 1
             curr_dir_shower.innerText = "Current direction: Down"
@@ -54,6 +56,8 @@ class SnakeClass {
     }
 
     move() {
+        this.dirx_current = this.dirx
+        this.diry_current = this.diry
         this.x += this.dirx
         this.y += this.diry
 
