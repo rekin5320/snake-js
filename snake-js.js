@@ -19,6 +19,12 @@ class SnakeClass {
         this.update_score()
     }
 
+    tail_count([x, y]) {
+        let n = 0
+        this.tail.forEach(([xi, yi]) => (x === xi && y === yi) ? n += 1 : null)
+        return n
+    }
+
     change_dir_left() {
         if (this.dirx_current === 0) {
             this.dirx = -1
@@ -56,33 +62,37 @@ class SnakeClass {
     }
 
     move() {
-        this.dirx_current = this.dirx
-        this.diry_current = this.diry
-        this.x += this.dirx
-        this.y += this.diry
+        if (this.dirx || this.diry) {
+            this.dirx_current = this.dirx
+            this.diry_current = this.diry
+            this.x += this.dirx
+            this.y += this.diry
 
-        if (this.x < 0 || this.x >= board_size || this.y < 0 || this.y >= board_size) {
-            console.log(`Game over, score: ${this.score}`)
-            gameNotOver = false
-            curr_dir_shower.innerText = "GAME OVER"
-            curr_dir_shower.style.color = "red"
-            start_button.disabled = false
-        }
-        else {
-            if (this.x === Apple.x && this.y === Apple.y) {
-                this.score += 1
-                this.update_score()
-                Apple.hide()
-                Apple.move()
+            if (this.x < 0 || this.x >= board_size || this.y < 0 || this.y >= board_size) {
+                return game_over()
             }
             else {
-                const last_segment = this.tail.shift()
-                uncolor_tile(last_segment, this.css_class)
-            }
+                const first_segment = [this.x, this.y]
+                this.tail.push(first_segment)
 
-            const first_segment = [this.x, this.y]
-            color_tile(first_segment, this.css_class)
-            this.tail.push(first_segment)
+                if (this.tail_count(first_segment) > 1) {
+                    game_over()
+                }
+                else {
+                    if (this.x === Apple.x && this.y === Apple.y) {
+                        this.score += 1
+                        this.update_score()
+                        Apple.hide()
+                        Apple.move()
+                    }
+                    else {
+                        const last_segment = this.tail.shift()
+                        uncolor_tile(last_segment, this.css_class)
+                    }
+    
+                    color_tile(first_segment, this.css_class)
+                }
+            }
         }
     }
 }
@@ -145,6 +155,14 @@ function color_tile([x, y], css_class) {
 function uncolor_tile([x, y], css_class) {
     let tile = get_tile(x, y)
     tile.classList.remove(css_class)
+}
+
+function game_over() {
+    console.log(`Game over, score: ${this.score}`)
+    gameNotOver = false
+    curr_dir_shower.innerText = "GAME OVER"
+    curr_dir_shower.style.color = "red"
+    start_button.disabled = false
 }
 
 function restart_game() {
