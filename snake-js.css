@@ -26,8 +26,8 @@ button:disabled{
 .tile {
     width: 40px;
     height: 40px;
-    background-color: gray;
-    border: 2px solid darkblue;
+    background-color: #666666;
+    border: 2px solid #222222;
 }
 
 .snake-tail {
