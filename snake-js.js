@@ -1,5 +1,5 @@
 function randint(a, b) {
-    // Return random integer a <= x < b
+    // Returns random integer a <= x < b
     return Math.floor(Math.random() * (b - a)) + a
 }
 
@@ -68,7 +68,7 @@ class SnakeClass {
             if (this.x === Apple.x && this.y === Apple.y) {
                 this.score += 1
                 this.update_score()
-                uncolor_tile([Apple.x, Apple.y], Apple.css_class)
+                Apple.hide()
                 Apple.move()
             }
             else {
@@ -96,8 +96,16 @@ class AppleClass {
             this.move()
         }
         else {
-            color_tile([this.x, this.y], this.css_class)
+            this.show()
         }
+    }
+
+    hide() {
+        uncolor_tile([this.x, this.y], this.css_class)
+    }
+
+    show() {
+        color_tile([this.x, this.y], this.css_class)
     }
 }
 
