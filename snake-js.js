@@ -15,7 +15,7 @@ class SnakeClass {
         this.diry_current = 0
         this.tail = [[this.x, this.y]]
         color_tile(this.tail[0], this.css_class)
-        this.score = 1
+        this.score = 0
         this.update_score()
     }
 
