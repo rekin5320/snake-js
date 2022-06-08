@@ -19,6 +19,17 @@ class SnakeClass {
         this.update_score()
     }
 
+    tail_includes([x, y]) {
+        let seg
+        for (let i = 0; i < this.tail.length; i++) {
+            seg = this.tail[i]
+            if (x === seg[0] && y === seg[1]) {
+                return true
+            }
+        }
+        return false
+    }
+
     tail_count([x, y]) {
         let n = 0
         this.tail.forEach(([xi, yi]) => (x === xi && y === yi) ? n += 1 : null)
@@ -90,7 +101,7 @@ class SnakeClass {
                         const last_segment = this.tail.shift()
                         uncolor_tile(last_segment, this.css_class)
                     }
-    
+
                     color_tile(first_segment, this.css_class)
                 }
             }
@@ -107,7 +118,7 @@ class AppleClass {
     move() {
         this.x = randint(0, board_size)
         this.y = randint(0, board_size)
-        if (Snake.tail.includes([this.x, this.y])) {
+        if (Snake.tail_includes([this.x, this.y])) {
             this.move()
         }
         else {
