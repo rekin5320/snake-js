@@ -63,6 +63,7 @@ class SnakeClass {
 
     move() {
         if (this.dirx || this.diry) {
+            console.log("Next move")
             this.dirx_current = this.dirx
             this.diry_current = this.diry
             this.x += this.dirx
@@ -158,7 +159,7 @@ function uncolor_tile([x, y], css_class) {
 }
 
 function game_over() {
-    console.log(`Game over, score: ${this.score}`)
+    console.log(`Game over, score: ${Snake.score}`)
     gameNotOver = false
     curr_dir_shower.innerText = "GAME OVER"
     curr_dir_shower.style.color = "red"
@@ -184,7 +185,6 @@ function restart_game() {
 }
 
 function main_loop() {
-    console.log("Next move")
     Snake.move()
     if (gameNotOver) {
         setTimeout(main_loop, 400);
