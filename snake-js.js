@@ -1,3 +1,14 @@
+function generate_table() {
+    const table = document.getElementById("board")
+    for (let i = 0; i < board_size; i++) {
+        let tr = table.insertRow()
+        for (let j = 0; j < board_size; j++) {
+            const td = tr.insertCell();
+            td.classList.add("tile")
+        }
+    }
+}
+
 function randint(a, b) {
     // Returns random integer a <= x < b
     return Math.floor(Math.random() * (b - a)) + a
@@ -202,10 +213,12 @@ function main_loop() {
     }
 }
 
+const board_size = 15  // preferably odd
+generate_table()
+
 document.onkeydown = check_key
 const board = document.getElementById("board").children[0]
 const score_shower = document.getElementById("score-shower")
 const curr_dir_shower = document.getElementById("curr-dir")
 const start_button = document.getElementById("start-button")
-const board_size = 11
 var gameNotOver, Snake, Apple
